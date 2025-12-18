@@ -1,0 +1,32 @@
+= PDFs
+
+== Agregar Outline
+
+1. Descargar metadatos
+
+[source, bash]
+----
+pdftk libro.pdf dump_data output meta.txt
+----
+
+2. Editar los metadatos, debajo de "NumberOfPages" usar: BookmarkBegin, BookmarkTitle, BookmarkLevel y BookmarkPageNumber para generar el índice. Ejemplo:
+
+[source]
+----
+NumberOfPages: 438
+BookmarkBegin
+BookmarkTitle: Chapter 1 - Introducing Message Queuing
+BookmarkLevel: 1
+BookmarkPageNumber: 19
+BookmarkBegin
+BookmarkTitle: Chapter 2 - System.Messaging
+BookmarkLevel: 1
+BookmarkPageNumber: 72
+----
+
+3. Generar el PDF con outline:
+
+[source, bash]
+----
+pdftk libro.pdf update_info meta.txt output libro_con_indice.pdf
+----
